@@ -1,6 +1,7 @@
 import pymysql
 conn = pymysql.connect(host='localhost', port=3306, user='root', password='M@m@rsh!a1384_', database='university')
 cur = conn.cursor()
+
 class university:
     def __init__(self):
         cur.execute('select ids from students')
@@ -18,6 +19,7 @@ class university:
         self.studentgrades = []
         self.studentgpu = 0
 
+
     def insert(self, studentid, studentname, studentlastname, studentgrades):
         self.studentid = studentid
         self.studentname = studentname
@@ -30,11 +32,13 @@ class university:
             university.adddatabase(self)
         else:
             print("\nOk")
+
     def calculategpu(self):
         for i in self.studentgrades:
             self.studentgpu += int(i)
         self.studentgpu /= len(self.studentgrades)
         print("\ngpu is ", self.studentgpu)
+
     def adddatabase(self):
         print("Are you calculate gpu?(y/n)")
         if input().lower() == 'n':
@@ -44,11 +48,13 @@ class university:
         cur.execute(db, value)
         conn.commit()
         print("added successfully")
+
     def showallstudents(self):
         cur.execute("select * from students")
         datas = cur.fetchall()
         for data in datas:
             print(data)
+
     def deletestudent(self, studentid):
         deleted = False
         orgstid = '('+studentid+',)'
