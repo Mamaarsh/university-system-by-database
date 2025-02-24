@@ -37,7 +37,7 @@ class university:
         for i in self.studentgrades:
             self.studentgpu += int(i)
         self.studentgpu /= len(self.studentgrades)
-        print("\ngpu is ", self.studentgpu)
+        print("\nGPU is ", self.studentgpu)
 
     def adddatabase(self):
         print("Are you calculate gpu?(y/n)")
@@ -47,13 +47,16 @@ class university:
         value = (self.studentid, self.studentname, self.studentlastname, self.studentgpu)
         cur.execute(db, value)
         conn.commit()
-        print("added successfully")
+        print("Added successfully")
 
     def showallstudents(self):
-        cur.execute("select * from students")
+        cur.execute("select * from students order by slname")
         datas = cur.fetchall()
-        for data in datas:
-            print(data)
+        if datas:
+            for data in datas:
+                print(data)
+        else:
+            print("No data exist!")
 
     def deletestudent(self, studentid):
         deleted = False
@@ -62,11 +65,11 @@ class university:
             if str(i) == orgstid:
                 cur.execute("delete from students where ids = %s",(studentid))
                 conn.commit()
-                print("deleted successfully")
+                print("Deleted successfully")
                 deleted = True
                 break
         if not deleted:
-            print("student not found")
+            print("Student not found")
 
     def countofstudents(self):
         cur.execute("select count(ids) from students")
@@ -77,7 +80,10 @@ class university:
         if choose == 1:
             cur.execute("select avg(gpu) from students")
             data = cur.fetchall()
-            print("Academic average of the university is: ", data[0][0])
+            if data[0][0] is not None:
+                print("Academic average of the university is: ", data[0][0])
+            else:
+                print("\nNo data exist!")
         elif choose == 2:
             cur.execute("select * from students where gpu > (select avg(gpu) from students)")
             data = cur.fetchall()
@@ -92,34 +98,34 @@ class university:
 
 
 unisys = university()
-print("\nhello and welcome to university system")
+print("\nHello and welcome to university system")
 while True:
-    print("----------------\nplease choose your option:")
-    print("1.insert student")
-    print("2.calculate gpu")
-    print("3.add database")
-    print("4.show all students")
-    print("5.delete student")
-    print("6.students count")
-    print("7.average of university")
-    print("8.exit\n----------------\n")
-    choice = int(input("your choice:"))
+    print("----------------\nPlease choose your option:")
+    print("1.Insert student")
+    print("2.Calculate gpu")
+    print("3.Add database")
+    print("4.Show all students")
+    print("5.Delete student")
+    print("6.Students count")
+    print("7.Average of university")
+    print("8.Exit\n----------------\n")
+    choice = int(input("Your choice:"))
     print('\n')
     match choice:
         case 1:
             flag = False
-            studentid = input("please enter student id: ")
-            studentname = input("please enter student name: ")
-            studentlastname = input("please enter student last name: ")
+            studentid = input("Please enter student id: ")
+            studentname = input("Please enter student name: ")
+            studentlastname = input("Please enter student last name: ")
             while not flag:
                 flag = True
                 studentgrades = []
-                sg = list(map(int, input("please enter student grades: ").split()))
+                sg = list(map(int, input("Please enter student grades: ").split()))
                 for i in sg:
                     if i >= 0 and i <= 20:
                         studentgrades.append(i)
                     else:
-                        print("invalid input!\nplease try again\n")
+                        print("Invalid input!\nPlease try again\n")
                         flag = False
                         break
                 if flag:
@@ -131,7 +137,7 @@ while True:
         case 4:
             unisys.showallstudents()
         case 5:
-            delstudent = input("please enter student id for delete: ")
+            delstudent = input("Please enter student id for delete: ")
             unisys.deletestudent(delstudent)
         case 6:
             unisys.countofstudents()
