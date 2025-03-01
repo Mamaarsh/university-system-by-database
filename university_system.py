@@ -20,6 +20,7 @@ class university:
         self.studentgpu = 0
 
 
+
     def insert(self, studentid, studentname, studentlastname, studentgrades):
         self.studentid = studentid
         self.studentname = studentname
