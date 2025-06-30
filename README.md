@@ -23,7 +23,7 @@ This is a Python-based university student management system that utilizes a MySQ
 ## ⚙️ Setup Instructions
 
 1. **Install MySQL** and create a database
-2. **Run the program
+2. Run the program
 
 # Notes
 
