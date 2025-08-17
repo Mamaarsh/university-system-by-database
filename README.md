@@ -2,7 +2,7 @@
 
 This is a Python-based university student management system that utilizes a MySQL database for persistent storage. The project provides functionality to manage student records, including insertion, deletion, search, and analysis.
 
-## 💡 Features
+## Features
 
 - Add new students with multiple courses and grades
 - Automatically calculate and store GPA
@@ -13,14 +13,14 @@ This is a Python-based university student management system that utilizes a MySQ
 - Display average GPA of the university
 - Show students with GPA higher than the university average
 
-## 🛠 Technologies Used
+## Technologies Used
 
 - **Python 3**
 - **MySQL** (tested with MySQL 8+)
 - **PyMySQL** for database connectivity
 - Object-Oriented Programming (OOP)
 
-## ⚙️ Setup Instructions
+## Setup Instructions
 
 1. **Install MySQL** and create a database
 2. Run the program
